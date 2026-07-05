@@ -1,0 +1,1003 @@
+/* ============================================================
+   TRAVEL-GUIDES.CSS
+   Page-specific styles for travel-guides.html ONLY.
+   Do NOT import into or from style.css / responsive.css.
+   Do NOT edit frozen files.
+============================================================ */
+
+/* =========================
+   FONTS & VARIABLES (copied from homepage)
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Lora:ital@0;1&display=swap');
+
+:root {
+    --primary-color: #c77838;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background: #000;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.tg-container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* =========================
+   NAVBAR (copied from style.css visually)
+========================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 60px;
+    transition: padding 0.3s ease;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 35px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    color: var(--white);
+}
+
+.navbar__logo a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+.navbar__menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar__menu a {
+    font-size: 0.90rem;
+    transition: 0.3s;
+    color: var(--white);
+}
+
+.navbar__menu a:hover { color: var(--primary-color); }
+.navbar__menu a.active { color: var(--primary-color); }
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.navbar__social {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    color: var(--white);
+}
+
+.navbar__social:first-child:hover { color: #E1306C; transform: translateY(-2px); }
+.navbar__social:nth-child(2):hover { color: #1877F2; transform: translateY(-2px); }
+
+.navbar__cta {
+    background: var(--primary-color);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.navbar__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+/* Scrolled state */
+.header--scrolled { padding: 10px 60px; }
+
+.header--scrolled .navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: rgba(0,0,0,0.05);
+    color: #111;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.header--scrolled .navbar__logo a { color: #111; }
+.header--scrolled .navbar__menu a { color: #444; font-weight: 500; }
+.header--scrolled .navbar__menu a:hover { color: var(--primary-color); }
+.header--scrolled .navbar__cta { color: var(--white); }
+.header--scrolled .navbar__social { color: #111; }
+.header--scrolled .navbar__hamburger { color: #111; }
+
+/* Mobile menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: #111;
+    z-index: 10000;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+}
+
+.mobile-menu.active { right: 0; }
+
+.mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.mobile-menu__header .navbar__logo a {
+    color: var(--white);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.mobile-menu__close {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.mobile-menu__links {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mobile-menu__links a {
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.mobile-menu__links a:hover { color: var(--primary-color); }
+
+/* =========================
+   HERO SECTION
+========================= */
+.tg-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.tg-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/images/attabad-lake.png');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+}
+
+.tg-hero__bg--loaded { transform: scale(1); }
+
+.tg-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.82) 0%,
+        rgba(0,0,0,0.55) 50%,
+        rgba(0,0,0,0.25) 100%
+    );
+    z-index: 1;
+}
+
+.tg-hero__container {
+    position: relative;
+    z-index: 2;
+    padding: 0 100px;
+    width: 100%;
+    padding-top: 120px;
+}
+
+.tg-hero__tagline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.tg-hero__tagline::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--primary-color);
+}
+
+.tg-hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 7vw, 7.5rem);
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    max-width: 800px;
+}
+
+.tg-hero__desc {
+    color: rgba(255,255,255,0.85);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+/* =========================
+   FEATURED ARTICLE
+========================= */
+.tg-featured {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.tg-featured__inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: #fdfcf9;
+    border: 1px solid #eeebe6;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.tg-featured__image {
+    height: 480px;
+    overflow: hidden;
+}
+
+.tg-featured__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.tg-featured__inner:hover .tg-featured__image img {
+    transform: scale(1.03);
+}
+
+.tg-featured__content {
+    padding: 50px 50px 50px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tg-featured__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+}
+
+.tg-featured__cat {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.tg-featured__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: 1px;
+    color: #111;
+}
+
+.tg-featured__desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.tg-btn-primary {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.tg-btn-primary:hover {
+    background: #d48b52;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   GUIDES GRID SECTION
+========================= */
+.tg-grid-section {
+    padding: 100px 0;
+    background: #fcfbfa;
+    border-top: 1px solid #eeebe6;
+    border-bottom: 1px solid #eeebe6;
+}
+
+.tg-grid-section__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.tg-section-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.tg-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: 1px;
+    color: #111;
+}
+
+.tg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+}
+
+/* Guide Card */
+.tg-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tg-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+
+.tg-card__image {
+    height: 220px;
+    overflow: hidden;
+}
+
+.tg-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.tg-card:hover .tg-card__image img {
+    transform: scale(1.05);
+}
+
+.tg-card__body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+}
+
+.tg-card__meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+}
+
+.tg-card__cat {
+    color: var(--primary-color);
+    font-weight: 750;
+}
+
+.tg-card__title {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #111;
+    font-weight: 700;
+    flex-grow: 1;
+}
+
+.tg-card__btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.tg-card__btn:hover {
+    transform: translateX(4px);
+}
+
+/* =========================
+   GUIDE CATEGORIES
+========================= */
+.tg-cats {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.tg-cats__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.tg-cats__header .tg-section-tag {
+    justify-content: center;
+}
+
+.tg-cats__header .tg-section-tag::before {
+    display: none;
+}
+
+.tg-cats__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.tg-cat-card {
+    background: #fdfcf9;
+    border: 1px solid #eeebe6;
+    border-radius: 6px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.tg-cat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border-color: var(--primary-color);
+}
+
+.tg-cat-card__icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.tg-cat-card__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.tg-cat-card__desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* =========================
+   LOCAL INSIGHTS SECTION
+========================= */
+.tg-insights {
+    padding: 100px 0;
+    background: #fdfcf9;
+    border-top: 1px solid #eeebe6;
+    border-bottom: 1px solid #eeebe6;
+}
+
+.tg-insights__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.tg-insights__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tg-insights__text .tg-section-tag {
+    justify-content: flex-start;
+}
+
+.tg-insights__text .tg-section-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--primary-color);
+}
+
+.tg-insights__desc {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.tg-insights__media {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    height: 400px;
+}
+
+.tg-insights__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================
+   NEWSLETTER SECTION
+========================= */
+.tg-newsletter {
+    padding: 100px 0;
+    background: #0a0a0a;
+    text-align: center;
+    color: var(--white);
+}
+
+.tg-newsletter__inner {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.tg-newsletter__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: 1.5px;
+}
+
+.tg-newsletter__desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+}
+
+.tg-newsletter__form {
+    display: flex;
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.tg-newsletter__form input {
+    flex-grow: 1;
+    background: rgba(255,255,255,0.03);
+    border: none;
+    padding: 16px 20px;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.tg-newsletter__form button {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0 30px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+}
+
+.tg-newsletter__form button:hover {
+    background: #d48b52;
+}
+
+/* =========================
+   CTA SECTION
+========================= */
+.tg-cta {
+    position: relative;
+    padding: 120px 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #a65c24 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.tg-cta__overlay {
+    position: absolute;
+    inset: 0;
+    background: url('../assets/images/cta_bg_k2_1783186976668.png') center center / cover no-repeat;
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+    z-index: 1;
+}
+
+.tg-cta__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.tg-cta__text {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tg-cta__tag {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tg-cta__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.tg-cta__desc {
+    color: rgba(255,255,255,0.88);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.tg-cta__buttons {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.tg-btn-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    color: var(--primary-color);
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.tg-btn-white:hover {
+    background: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.tg-btn-outline-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--white);
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tg-btn-outline-light:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   FOOTER (copied from style.css)
+========================= */
+.footer {
+    background-color: #0a0a0a;
+    color: rgba(255,255,255,0.7);
+    padding: 100px 0 40px;
+    font-size: 0.95rem;
+}
+
+.footer__container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.footer__logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.footer__col p {
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.footer__socials {
+    display: flex;
+    gap: 15px;
+}
+
+.footer__socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.footer__socials a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer__col h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer__col ul a { transition: color 0.3s ease; }
+.footer__col ul a:hover { color: var(--primary-color); }
+
+.footer__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* =========================
+   SCROLL TO TOP
+========================= */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: #396788;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background: #2b4f6b;
+    transform: translateY(-3px);
+}
+
+/* =========================
+   RESPONSIVE — TABLET 1024px
+========================= */
+@media screen and (max-width: 1024px) {
+    /* Navbar */
+    .navbar__menu,
+    .navbar__cta,
+    .navbar__social { display: none; }
+
+    .navbar__hamburger { display: block; }
+
+    .header { padding: 15px 30px; }
+    .header--scrolled { padding: 10px 30px; }
+
+    /* Hero */
+    .tg-hero__container { padding: 120px 30px 60px; }
+
+    /* Featured */
+    .tg-featured__inner { grid-template-columns: 1fr; }
+    .tg-featured__image { height: 350px; }
+    .tg-featured__content { padding: 40px; }
+
+    /* Grid */
+    .tg-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+
+    /* Categories */
+    .tg-cats__grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    /* Insights */
+    .tg-insights__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .tg-insights__media { height: 320px; }
+
+    /* CTA */
+    .tg-cta__content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .tg-cta__text { align-items: center; }
+    .tg-cta__buttons { justify-content: center; }
+
+    /* Footer */
+    .footer__container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        text-align: center;
+    }
+    .footer__socials { justify-content: center; }
+    .footer__bottom { flex-direction: column; gap: 20px; }
+}
+
+/* =========================
+   RESPONSIVE — TABLET 768px
+========================= */
+@media screen and (max-width: 768px) {
+    .header { padding: 12px 20px; }
+    .header--scrolled { padding: 10px 20px; }
+
+    .tg-hero__container { padding: 110px 20px 50px; }
+
+    .tg-hero__title { font-size: clamp(3rem, 9vw, 5rem); }
+
+    .tg-featured { padding: 70px 0; }
+    .tg-featured__image { height: 280px; }
+    .tg-featured__content { padding: 30px 20px; }
+
+    .tg-grid-section { padding: 70px 0; }
+    .tg-grid { grid-template-columns: 1fr; gap: 25px; }
+
+    .tg-cats { padding: 70px 0; }
+    .tg-cats__grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+    .tg-insights { padding: 70px 0; }
+    .tg-newsletter { padding: 70px 0; }
+
+    .tg-cta { padding: 80px 0; }
+    .tg-cta__title { font-size: 2.8rem; }
+    .tg-cta__buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .footer__container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer__socials { justify-content: center; }
+}
+
+/* =========================
+   RESPONSIVE — MOBILE 480px
+========================= */
+@media screen and (max-width: 480px) {
+    .tg-hero__title { font-size: 2.8rem; }
+    .tg-hero__desc { font-size: 0.95rem; }
+
+    .tg-cats__grid { grid-template-columns: 1fr; }
+    
+    .tg-newsletter__form { flex-direction: column; border: none; background: transparent; }
+    .tg-newsletter__form input { border-radius: 4px; margin-bottom: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.15); }
+    .tg-newsletter__form button { border-radius: 4px; padding: 16px; }
+}

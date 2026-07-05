@@ -1,0 +1,6 @@
+{
+  "name": "Broad Peak Adventures",
+  "description": "A high-quality adventure tourism platform showcasing expeditions, treks, and cultural journeys in Gilgit-Baltistan, Pakistan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
